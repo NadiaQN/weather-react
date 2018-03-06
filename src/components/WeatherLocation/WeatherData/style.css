@@ -1,0 +1,15 @@
+.weatherDataCont{
+    margin-bottom: 1em;
+}
+.cont-temp{
+    margin: 1em;
+}
+.cont-temp span{
+    font-weight: bold;
+    font-size: 1.8em;
+    margin: 0.5em;
+}
+.cont-extra span{
+    margin: 0.5em;
+    font-size: 1.2em;
+}
