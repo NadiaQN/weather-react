@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Paper from 'material-ui/Paper';
 import AppBar from 'material-ui/AppBar';
 import { Grid, Row, Col} from 'react-flexbox-grid';
 import LocationList from './components/LocationList';
 import ForecastExtended from './components/ForecastExtended';
+import { setCity } from './actions';
 import './App.css';
 
 
@@ -27,7 +29,8 @@ class App extends Component {
 }
   hadlerSelectionLocation = city => {
     this.setState({ city });
-    console.log(`hadlerSelectionLocation ${city}`)
+    console.log(`hadlerSelectionLocation ${city}`);
+    this.props.setCity(city);
   }
   render() {
     const { city } = this.state;
@@ -36,7 +39,7 @@ class App extends Component {
         <Grid>
           <Row>
             <Col xs={12}>
-              <AppBar title='Belu'/>
+              <AppBar title='App Weather'/>
             </Col>
           </Row>
           <Row>
@@ -59,5 +62,11 @@ class App extends Component {
   }
 }
 
+// Esta función nos permite trabajar con las acciones
+const mapDispatchToPropsActions = (dispatch) => ({
+  setCity: value => dispatch(setCity(value))
+});
 
-export default App;
+const AppConnected = connect(null, mapDispatchToPropsActions)(App);
+
+export default AppConnected;
