@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Paper from 'material-ui/Paper';
 import AppBar from 'material-ui/AppBar';
 import { Grid, Row, Col} from 'react-flexbox-grid';
-import LocationList from './components/LocationList';
-import ForecastExtended from './components/ForecastExtended';
-import { setCity } from './actions';
+import LocationListContainer from './containers/LocationListContainer';
+import ForecastExtendedContainer from './containers/ForecastExtendedContainer';
 import './App.css';
-
 
 
 const cities =  [
@@ -21,19 +18,8 @@ const cities =  [
 ];
 
 class App extends Component {
-  constructor() {
-    super();  
-    this.state = {
-      city: null
-  }
-}
-  hadlerSelectionLocation = city => {
-    this.setState({ city });
-    console.log(`hadlerSelectionLocation ${city}`);
-    this.props.setCity(city);
-  }
+
   render() {
-    const { city } = this.state;
     return (
       <MuiThemeProvider>
         <Grid>
@@ -44,14 +30,12 @@ class App extends Component {
           </Row>
           <Row>
             <Col xs={12} md={6}>
-              <LocationList cities={cities} onSelectedLocation={this.hadlerSelectionLocation}/>
+              <LocationListContainer cities={cities}/>
             </Col>
             <Col xs={12} md={6}>
               <Paper zDepth={4}>
                 <div className='detail'>
-                  {
-                    city === null ? <h2>No se seleccionó ciudad</h2> : <ForecastExtended city={city}></ForecastExtended>
-                  }
+                  <ForecastExtendedContainer/>
                 </div>
               </Paper>
             </Col>
@@ -62,11 +46,6 @@ class App extends Component {
   }
 }
 
-// Esta función nos permite trabajar con las acciones
-const mapDispatchToPropsActions = (dispatch) => ({
-  setCity: value => dispatch(setCity(value))
-});
+export default App;
 
-const AppConnected = connect(null, mapDispatchToPropsActions)(App);
 
-export default AppConnected;
