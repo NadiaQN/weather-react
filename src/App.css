@@ -1,8 +1,0 @@
-.detail{
-    background-color: rgba(250, 250, 250, 0.5);
-    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-    height: 90vh;
-    padding: 0 20px;
-    border-radius: 0.5em;
-    overflow: auto;
-}
